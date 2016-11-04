@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
+    //弾の種類
     public enum BulletType
     {
         Normal,
@@ -12,21 +13,40 @@ public class Bullet : MonoBehaviour {
         Division
     }
 
+    //種類
     public BulletType m_Type;
 
-    bool IsDestroy = false;
-
+    //体力
     public int HitHP;
 
-	// Use this for initialization
-	void Start () {
-	
+    //消えるまでの時間
+    public float DestoryTime = 5;
+
+
+    //爆裂するかのフラグ
+    private bool IsDivision = false;
+
+    //出現してからの時間
+    private float DestroyCurrentTime = 0;
+
+    // Use this for initialization
+    void Start () {
+
+        if (m_Type == BulletType.Penetration)
+        {
+            transform.FindChild("Collision").gameObject.layer = LayerMask.GetMask("PenetrationBullet");
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-        if(IsDestroy)
+        if(DestoryTime < (DestroyCurrentTime += Time.deltaTime))
+        {
+            Destroy(gameObject);
+        }
+
+        if(IsDivision)
         {
             GameObject BulletObj;
 
@@ -39,8 +59,6 @@ public class Bullet : MonoBehaviour {
                 BulletObj.GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0, 0, 30 * Mathf.Pow(-1,i)) * GetComponent<Rigidbody2D>().velocity;
 
                 BulletObj.GetComponent<Bullet>().HitHP = HitHP;
-
-                Debug.Log(BulletObj.GetComponent<Rigidbody2D>().velocity);
             }
 
             Destroy(gameObject);
@@ -50,15 +68,55 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D Hit)
     {
-        HitHP--;
-
-        if(m_Type == BulletType.Division && HitHP > 0)
+        switch(m_Type)
         {
-            IsDestroy = true;
+            case BulletType.Normal:
+
+                HitHP--;
+
+                break;
+
+            case BulletType.Penetration:
+
+                if(Hit.gameObject.tag == "Enemy")
+                {
+
+                }
+                else
+                {
+                    HitHP--;
+                }
+             
+                break;
+
+            case BulletType.Diffusion:
+
+                HitHP--;
+
+                break;
+
+            case BulletType.Exploding:
+
+                HitHP--;
+
+                break;
+
+            case BulletType.Division:
+
+                HitHP--;
+
+                if (m_Type == BulletType.Division && HitHP > 0)
+                {
+                    IsDivision = true;
+                }
+
+                break;
         }
-        else if(HitHP <= 0)
+
+        if (HitHP <= 0)
         {
             Destroy(gameObject);
         }
+
     }
 }
