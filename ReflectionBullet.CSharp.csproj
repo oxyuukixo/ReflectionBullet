@@ -66,6 +66,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Hayato\Script\B_EnemyController.cs" />
+    <Compile Include="Assets\Hayato\Script\EnemyBulletController.cs" />
     <Compile Include="Assets\Hayato\Script\EnemyController.cs" />
     <Compile Include="Assets\Yu-ki\Scripts\Bullet.cs" />
     <Compile Include="Assets\Yu-ki\Scripts\Player.cs" />
