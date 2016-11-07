@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     private RaycastHit2D m_ray;
 
+    //コンポーネント用の変数
     private Rigidbody2D m_Rigidbody;
     private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
@@ -42,14 +43,9 @@ public class Player : MonoBehaviour
         {
             m_Rigidbody.velocity = new Vector2(XAxis * m_Speed, m_Rigidbody.velocity.y);
 
-
             m_SpriteRenderer.flipX = XAxis > 0;
 
-
-            if (Mathf.Abs(XAxis) >= 1)
-            {
-                m_FireDir.x = Mathf.Abs(m_FireDir.x) * Mathf.Sign(XAxis);
-            }
+            m_FireDir.x = Mathf.Abs(m_FireDir.x) * Mathf.Sign(XAxis);
         }
         else
         {

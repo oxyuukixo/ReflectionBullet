@@ -38,10 +38,15 @@ public class Bullet : MonoBehaviour {
         }
 	}
 	
+    void FixedUpdate()
+    {
+
+    }
+
 	// Update is called once per frame
 	void Update () {
-	
-        if(DestoryTime < (DestroyCurrentTime += Time.deltaTime))
+
+        if (DestoryTime < (DestroyCurrentTime += Time.deltaTime))
         {
             Destroy(gameObject);
         }
@@ -68,7 +73,7 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D Hit)
     {
-        switch(m_Type)
+        switch (m_Type)
         {
             case BulletType.Normal:
 
