@@ -12,6 +12,7 @@ public class B_EnemyController : MonoBehaviour {
 
     public GameObject shootposition;
 
+    public int HP;
 
     // Use this for initialization
     IEnumerator Start () {
@@ -44,4 +45,17 @@ public class B_EnemyController : MonoBehaviour {
 
         transform.localScale = scale;
 	}
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Bullet")
+        {
+            HP--;
+
+            if (HP <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class S_EnemyController : MonoBehaviour {
 
     public GameObject target;
     public float speed = 0.1f; // 移動量
@@ -11,14 +11,14 @@ public class EnemyController : MonoBehaviour {
 
     bool moveflag;
 
-    void Start()
-    {
+    // Use this for initialization
+    void Start () {
         moveflag = true;
     }
+	
+	// Update is called once per frame
+	void Update () {
 
-    // Update is called once per frame
-    void Update()
-    {
         Vector2 enemyPos = this.gameObject.transform.localPosition;
         Vector3 scale = transform.localScale;
 
@@ -42,15 +42,20 @@ public class EnemyController : MonoBehaviour {
             enemyPos.x += dx;
         }
 
-        if(moveflag == false)
+        if (moveflag == false)
         {
             // 移動を反映
             enemyPos.x += speed;
 
-            if(vy > 0.1f)
+            if (vy > 0.1f)
             {
                 moveflag = true;
             }
+        }
+
+        if(EnemySheld.sheld_flag == false)
+        {
+            speed = 0.1f;
         }
 
         if (dx >= 0)
@@ -66,7 +71,6 @@ public class EnemyController : MonoBehaviour {
         transform.localScale = scale;
 
         this.gameObject.transform.localPosition = enemyPos;
-
     }
 
     void OnCollisionEnter2D(Collision2D other)
