@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-
     Vector2 m_FireDir = new Vector2(1, 0);
 
     public GameObject m_Bullet;
@@ -14,7 +13,17 @@ public class Player : MonoBehaviour
 
     public LayerMask GroundLayer;
 
+    //使用する弾
+    public GameObject NormalBullet;       //通常弾
+    public GameObject SpeedBullet;          //スピード弾
+    public GameObject PenetrationBullet;    //貫通弾
+    public GameObject DiffusionBullet;      //拡散弾
+    public GameObject ExplosionBullet;      //爆裂弾
+    public GameObject DivisionBullet;        //分裂弾
+
     private RaycastHit2D m_ray;
+
+    private GameObject[] BulletList;
 
     //コンポーネント用の変数
     private Rigidbody2D m_Rigidbody;
@@ -24,6 +33,13 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        BulletList = new GameObject[5];
+        BulletList[0] = NormalBullet;
+        BulletList[1] = SpeedBullet;
+        BulletList[2] = PenetrationBullet;
+        BulletList[3] = DiffusionBullet;
+        BulletList[4] = ExplosionBullet;
+        BulletList[5] = DivisionBullet;
 
         //コンポーネントの取得
         m_Rigidbody = GetComponent<Rigidbody2D>();
