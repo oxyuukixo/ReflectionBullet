@@ -3,27 +3,41 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    //弾の発射する方法
     Vector2 m_FireDir = new Vector2(1, 0);
 
-    public GameObject m_Bullet;
-
+    //移動スピード
     public float m_Speed = 5f;
 
+    //ジャンプ力
     public float m_JumpPower = 5f;
 
-    public LayerMask GroundLayer;
+    //地面のレイヤー
+    public LayerMask m_GroundLayer;
+
+    //チャージが完了するまでの時間
+    public float m_ChargeTime;
 
     //使用する弾
-    public GameObject NormalBullet;       //通常弾
-    public GameObject SpeedBullet;          //スピード弾
-    public GameObject PenetrationBullet;    //貫通弾
-    public GameObject DiffusionBullet;      //拡散弾
-    public GameObject ExplosionBullet;      //爆裂弾
-    public GameObject DivisionBullet;        //分裂弾
+    public GameObject m_NormalBullet;       //通常弾
+    public GameObject m_SpeedBullet;          //スピード弾
+    public GameObject m_PenetrationBullet;    //貫通弾
+    public GameObject m_DiffusionBullet;      //拡散弾
+    public GameObject m_ExplosionBullet;      //爆裂弾
+    public GameObject m_DivisionBullet;        //分裂弾
 
+    //弾の種類
+    [HideInInspector]
+    public Bullet.BulletType m_BulletType;
+
+    //地面のあたり判定をするためのレイ
     private RaycastHit2D m_ray;
 
-    private GameObject[] BulletList;
+    //弾をリスト化するための配列
+    private GameObject[] m_BulletList;
+
+    //現在のチャージ時間
+    private float m_ChargeCurrentTime;
 
     //コンポーネント用の変数
     private Rigidbody2D m_Rigidbody;
@@ -33,13 +47,13 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        BulletList = new GameObject[5];
-        BulletList[0] = NormalBullet;
-        BulletList[1] = SpeedBullet;
-        BulletList[2] = PenetrationBullet;
-        BulletList[3] = DiffusionBullet;
-        BulletList[4] = ExplosionBullet;
-        BulletList[5] = DivisionBullet;
+        m_BulletList = new GameObject[6];
+        m_BulletList[0] = m_NormalBullet;
+        m_BulletList[1] = m_SpeedBullet;
+        m_BulletList[2] = m_PenetrationBullet;
+        m_BulletList[3] = m_DiffusionBullet;
+        m_BulletList[4] = m_ExplosionBullet;
+        m_BulletList[5] = m_DivisionBullet;
 
         //コンポーネントの取得
         m_Rigidbody = GetComponent<Rigidbody2D>();
@@ -76,14 +90,34 @@ public class Player : MonoBehaviour
             m_FireDir = Quaternion.Euler(0, 0, YAxis * Mathf.Sign(m_FireDir.x)) * m_FireDir;
         }
 
-        //1ボタンが押されたら
-        if (Input.GetKeyDown("joystick button 0"))
+        if(Input.GetKey("joystick button 0"))
         {
-            GameObject BulletObj = Instantiate(m_Bullet);
+            m_ChargeCurrentTime += Time.deltaTime;
+        }
+        
+        //1ボタンが離されたら
+        if (Input.GetKeyUp("joystick button 0"))
+        {
+            //チャージが完了していたら
+            if(m_ChargeCurrentTime > m_ChargeTime)
+            {
+                GameObject BulletObj = Instantiate(m_BulletList[(int)m_BulletType]);
 
-            BulletObj.transform.position = transform.position;
+                BulletObj.transform.position = transform.position;
 
-            BulletObj.GetComponent<Rigidbody2D>().velocity = m_FireDir * 20;
+                BulletObj.GetComponent<Rigidbody2D>().velocity = m_FireDir * 20;
+            }
+            else
+            {
+                GameObject BulletObj = Instantiate(m_BulletList[0]);
+
+                BulletObj.transform.position = transform.position;
+
+                BulletObj.GetComponent<Rigidbody2D>().velocity = m_FireDir * 20;
+            }
+
+            m_ChargeCurrentTime = 0;
+
         }
 
         //3ボタンが押されたら
@@ -92,6 +126,22 @@ public class Player : MonoBehaviour
             m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, m_JumpPower);
 
             m_Animator.SetTrigger("JumpTrigger");
+        }
+
+        if (Input.GetKeyDown("joystick button 4"))
+        {
+            if((m_BulletType -= 1) < Bullet.BulletType.Speed)
+            {
+                m_BulletType = Bullet.BulletType.Division;
+            }
+        }
+
+        if (Input.GetKeyDown("joystick button 5"))
+        {
+            if ((m_BulletType += 1) > Bullet.BulletType.Division)
+            {
+                m_BulletType = Bullet.BulletType.Speed;
+            }
         }
 
         //弾の打つ方向へRayを飛ばす
@@ -103,7 +153,7 @@ public class Player : MonoBehaviour
 
         Vector2 End = new Vector2(transform.position.x, transform.position.y - GetComponent<SpriteRenderer>().bounds.size.y / 2);
 
-        if (Physics2D.Linecast(Start, End, GroundLayer))
+        if (Physics2D.Linecast(Start, End, m_GroundLayer))
         {
             m_Animator.SetBool("IsFall", false);
         }
