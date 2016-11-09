@@ -7,13 +7,15 @@ public class EnemyController : MonoBehaviour {
     public GameObject target;
     public float speed = 0.1f; // 移動量
 
-    public int HP;
+    public float HP;
 
     bool moveflag;
+    bool damage_flag;
 
     void Start()
     {
         moveflag = true;
+        damage_flag = true;
     }
 
     // Update is called once per frame
@@ -73,12 +75,32 @@ public class EnemyController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Bullet")
         {
-            HP--;
+            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
 
             if (HP <= 0)
             {
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Bullet" && damage_flag == true && other.gameObject.GetComponent<Bullet>().m_Type == Bullet.BulletType.Penetration)
+        {
+            damage_flag = false;
+            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
+            Debug.Log(HP);
+
+            if (HP <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        damage_flag = true;
     }
 }

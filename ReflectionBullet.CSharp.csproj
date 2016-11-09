@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hayato\Script\B_EnemyController.cs" />
+    <Compile Include="Assets\Hayato\Script\CameraMove.cs" />
     <Compile Include="Assets\Hayato\Script\EnemyBulletController.cs" />
     <Compile Include="Assets\Hayato\Script\EnemyController.cs" />
     <Compile Include="Assets\Hayato\Script\EnemySheld.cs" />
