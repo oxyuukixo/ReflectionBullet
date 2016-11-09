@@ -32,14 +32,14 @@ public class CameraMove : MonoBehaviour {
             transform.position = new Vector3(end_x, player.transform.position.y, -1);
         }
 
-        if (transform.position.x < start_y)
+        if (transform.position.y < start_y)
         {
-            transform.position = new Vector3(player.transform.position.x, start_y, -1);
+            transform.position = new Vector3(transform.position.x, start_y, -1);
         }
 
-        if (transform.position.x >= end_y)
+        if (transform.position.y >= end_y)
         {
-            transform.position = new Vector3(player.transform.position.x, end_y, -1);
+            transform.position = new Vector3(transform.position.x, end_y, -1);
         }
     }
 }
