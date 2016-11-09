@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     //地面のレイヤー
     public LayerMask m_GroundLayer;
 
+    //ジャージ時に表示するオブジェクト
+    public GameObject m_ChargeObject;
+
     //チャージが完了するまでの時間
     public float m_ChargeTime;
 
@@ -49,6 +52,9 @@ public class Player : MonoBehaviour
 
     //現在のチャージ時間
     private float m_ChargeCurrentTime;
+
+    //チャージしているときに出現するオブジェクトの実態
+    private GameObject m_ChargeingObject;
 
     //ジャンプしているかどうかのフラグ
     private bool m_IsJump = false;
@@ -180,11 +186,23 @@ public class Player : MonoBehaviour
     //=============================================================================
     private void Fire()
     {
+        //1ボタンが押されたら
+        if (Input.GetKeyDown("joystick button 0"))
+        {
+            m_ChargeingObject = Instantiate(m_ChargeObject);
+            m_ChargeingObject.transform.position = transform.position + new Vector3(0,-0.5f);
+        }
+
         //1ボタンが押されていたら
         if (Input.GetKey("joystick button 0"))
         {
             //チャージ時間を加算する
-            m_ChargeCurrentTime += Time.deltaTime;
+            if((m_ChargeCurrentTime += Time.deltaTime) >= m_ChargeTime)
+            {
+                m_ChargeingObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0);
+            }
+
+            m_ChargeingObject.transform.position = transform.position + new Vector3(0, -0.5f);
         }
 
         //1ボタンが離されたら
@@ -194,7 +212,7 @@ public class Player : MonoBehaviour
             GameObject BulletObj;
 
             //チャージが完了していたら
-            if (m_ChargeCurrentTime > m_ChargeTime)
+            if (m_ChargeCurrentTime >= m_ChargeTime)
             {
                 //選択されている弾を生成
                 BulletObj = Instantiate(m_BulletList[(int)m_BulletType]);
@@ -229,6 +247,8 @@ public class Player : MonoBehaviour
             m_IsFire = true;
 
             m_ChargeCurrentTime = 0;
+
+            Destroy(m_ChargeingObject);
 
         }
     }
