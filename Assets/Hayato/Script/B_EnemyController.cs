@@ -12,10 +12,14 @@ public class B_EnemyController : MonoBehaviour {
 
     public GameObject shootposition;
 
-    public int HP;
+    public float HP;
+
+    bool damage_flag;
 
     // Use this for initialization
     IEnumerator Start () {
+
+        damage_flag = true;
 
         shootposition = gameObject.transform.FindChild("BulletPosition").gameObject;
 
@@ -50,12 +54,32 @@ public class B_EnemyController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Bullet")
         {
-            HP--;
+            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
 
             if (HP <= 0)
             {
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Bullet" && damage_flag == true && other.gameObject.GetComponent<Bullet>().m_Type == Bullet.BulletType.Penetration)
+        {
+            damage_flag = false;
+            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
+            Debug.Log(HP);
+
+            if (HP <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        damage_flag = true;
     }
 }

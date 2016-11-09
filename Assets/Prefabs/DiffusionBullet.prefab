@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Type: 3
-  m_HitHP: 2
+  m_HitHP: 3
   m_Damage: 2
   m_Speed: 20
   m_DestoryTime: 5

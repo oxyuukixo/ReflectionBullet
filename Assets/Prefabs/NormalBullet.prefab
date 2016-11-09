@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Type: 0
   m_HitHP: 3
-  m_Damage: 5
+  m_Damage: 1
   m_Speed: 20
   m_DestoryTime: 5
   m_DiffusionNum: 0
