@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
 
                 BulletObj.transform.position = transform.position;
 
-                BulletObj.GetComponent<Rigidbody2D>().velocity = m_FireDir * 20;
+                BulletObj.GetComponent<Rigidbody2D>().velocity = m_FireDir;
             }
             else
             {
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 
                 BulletObj.transform.position = transform.position;
 
-                BulletObj.GetComponent<Rigidbody2D>().velocity = m_FireDir * 20;
+                BulletObj.GetComponent<Rigidbody2D>().velocity = m_FireDir;
             }
 
             m_ChargeCurrentTime = 0;

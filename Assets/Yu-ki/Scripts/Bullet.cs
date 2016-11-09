@@ -19,16 +19,28 @@ public class Bullet : MonoBehaviour {
     public BulletType m_Type;
 
     //体力
-    public int m_HitHP;
+    public int m_HitHP = 3;
 
     //攻撃力
-    public float m_Damage;
+    public float m_Damage = 1;
 
-    //拡散弾の時の弾の数
-    public int m_diffusionNum = 0;
+    //速さ
+    public float m_Speed = 20;
 
     //消えるまでの時間
     public float m_DestoryTime = 5;
+
+    //拡散弾の時の弾の数
+    [HideInInspector]
+    public int m_DiffusionNum = 0;
+
+    //拡散時の最大角度
+    [HideInInspector]
+    public float m_DiffusionAngle = 30;
+
+    //爆発エフェクト
+    [HideInInspector]
+    public GameObject m_ExplosionParticle;
 
     //爆裂するかのフラグ
     private bool m_IsDivision = false;
@@ -36,28 +48,30 @@ public class Bullet : MonoBehaviour {
     //出現してからの時間
     private float m_DestroyCurrentTime = 0;
 
+    //コンポーネント
+    private Rigidbody2D m_Rigidbody2D;
+
     // Use this for initialization
     void Start () {
 
-        //貫通弾だったら
-        if (m_Type == BulletType.Penetration)
-        {
-            //あたり判定をするコリジョンを貫通タイプにする
-            transform.FindChild("Collision").gameObject.layer = LayerMask.GetMask("PenetrationBullet");
-        }
+        //コンポーネントの取得
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+
+        m_Rigidbody2D.velocity = m_Rigidbody2D.velocity.normalized  * m_Speed;
+
         //拡散だったら
         if (m_Type == BulletType.Diffusion)
         {
             GameObject BulletObj;
 
             //拡散させる弾の数だけ弾を生成
-            for (int i = 1; i <= 2; i++)
+            for (int i = 0; i < m_DiffusionNum; i++)
             {
                 BulletObj = Instantiate(gameObject);
 
                 BulletObj.transform.position = transform.position;
 
-                BulletObj.GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0, 0, 30 * Mathf.Pow(-1, i)) * GetComponent<Rigidbody2D>().velocity;
+                BulletObj.GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0, 0, m_DiffusionAngle / 2 - (m_DiffusionAngle / (m_DiffusionNum - 1) * i)) * GetComponent<Rigidbody2D>().velocity;
 
                 BulletObj.GetComponent<Bullet>().m_Type = BulletType.Normal;
             }
@@ -121,7 +135,9 @@ public class Bullet : MonoBehaviour {
                 m_HitHP--;
 
                 //爆発のパーティクルを発生
+                GameObject SpawnExplosion = Instantiate(m_ExplosionParticle);
 
+                SpawnExplosion.transform.position = transform.position;
 
                 break;
 
