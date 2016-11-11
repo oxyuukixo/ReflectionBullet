@@ -16,6 +16,8 @@ public class B_EnemyController : MonoBehaviour {
 
     bool damage_flag;
 
+    int direction = -1;
+
     // Use this for initialization
     IEnumerator Start () {
 
@@ -25,8 +27,7 @@ public class B_EnemyController : MonoBehaviour {
 
         while (true)
         {
-            // 弾をプレイヤーと同じ位置で発射
-            Instantiate(bullet, transform.position, shootposition.transform.rotation);
+            bullet.GetComponent<Bullet>().SpawnBullet(transform.position,new Vector2(direction,0));
             // 1秒待つ
             yield return new WaitForSeconds(1.0f);
         }
@@ -41,10 +42,12 @@ public class B_EnemyController : MonoBehaviour {
         if(dx > 0.1f)
         {
             scale.x = -0.3f;
+            direction = 1;
         }
         else
         {
             scale.x = 0.3f;
+            direction = -1;
         }
 
         transform.localScale = scale;
@@ -69,7 +72,7 @@ public class B_EnemyController : MonoBehaviour {
         {
             damage_flag = false;
             HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
-            Debug.Log(HP);
+            
 
             if (HP <= 0)
             {
