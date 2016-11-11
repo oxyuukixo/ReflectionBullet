@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
 
     //移動スピード
     public float m_Speed = 5f;
+    public float m_DashSpeed = 10f;
+
+    //ダッシュする時間
+    public float m_DashTime = 2f;
 
     //ジャンプ力
     public float m_JumpPower = 5f;
@@ -62,6 +66,12 @@ public class Player : MonoBehaviour
 
     //攻撃しているかどうかのフラグ
     private bool m_IsFire = false;
+
+    //ダッシュ状態かどうかのフラグ
+    private bool m_IsDash = false;
+
+    //現在のダッシュ時間
+    private float m_DashCurrentTime;
 
     //生きているかどうかのフラグ
     private bool m_IsSurvival = true;
@@ -119,6 +129,9 @@ public class Player : MonoBehaviour
 
             //ジャンプ
             Jump();
+
+            //ダッシュ
+            Dash();
 
             //弾の変更
             ChangeBullet();
@@ -183,12 +196,6 @@ public class Player : MonoBehaviour
     //=============================================================================
     private void Fire()
     {
-        //1ボタンが押されたら
-        if (Input.GetKeyDown("joystick button 0"))
-        {
-           
-        }
-
         //1ボタンが押されていたら
         if (Input.GetKey("joystick button 0"))
         {
@@ -319,7 +326,7 @@ public class Player : MonoBehaviour
     //=============================================================================
     void Jump()
     {
-        if (Input.GetKeyDown("joystick button 4"))
+        if (Input.GetKeyDown("joystick button 6"))
         {
             if ((m_BulletType -= 1) < Bullet.BulletType.Speed)
             {
@@ -327,7 +334,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("joystick button 5"))
+        if (Input.GetKeyDown("joystick button 7"))
         {
             if ((m_BulletType += 1) > Bullet.BulletType.Division)
             {
@@ -335,7 +342,35 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+
+    //=============================================================================
+    //
+    // Purpose ダッシュ　関数
+    //
+    //=============================================================================
+    void Dash()
+    {
+        if (Input.GetKeyDown("joystick button 5") && !m_IsJump && !m_IsSecondJump)
+        {
+            m_IsDash = true;
+            m_Animator.SetBool("IsDash", true);
+            m_DashCurrentTime = 0;
+        }
+
+        if(m_IsDash)
+        {
+            if((m_DashCurrentTime += Time.deltaTime) < m_DashTime)
+            {
+                m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.normalized.x * m_DashSpeed, m_Rigidbody.velocity.y);
+            }
+            else
+            {
+                m_IsDash = false;
+                m_Animator.SetBool("IsDash", false);
+            }
+        }
+    }
+
     //=============================================================================
     //
     // Purpose オブジェクトとヒットした瞬間
