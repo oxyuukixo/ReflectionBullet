@@ -95,7 +95,6 @@ public class S_EnemyController : MonoBehaviour {
         {
             damage_flag = false;
             HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
-            Debug.Log(HP);
 
             if (HP <= 0)
             {
