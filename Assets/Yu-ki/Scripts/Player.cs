@@ -139,14 +139,11 @@ public class Player : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
 
-        //if (m_IsFire)
-        //{
-            if (!stateInfo.IsName("PlayerFire") && !stateInfo.IsName("PlayerUpFire") && !stateInfo.IsName("PlayerDownFire") 
-            && !stateInfo.IsName("PlayerJumpUpFire") && !stateInfo.IsName("PlayerJumpFire") && !stateInfo.IsName("PlayerJumpDownFire"))
-            {
-                m_IsFire = false;
-            }     
-        //}
+        if (!stateInfo.IsName("PlayerFire") && !stateInfo.IsName("PlayerUpFire") && !stateInfo.IsName("PlayerDownFire")
+        && !stateInfo.IsName("PlayerJumpUpFire") && !stateInfo.IsName("PlayerJumpFire") && !stateInfo.IsName("PlayerJumpDownFire"))
+        {
+            m_IsFire = false;
+        }
 
         return m_IsFire;
     }
@@ -189,20 +186,30 @@ public class Player : MonoBehaviour
         //1ボタンが押されたら
         if (Input.GetKeyDown("joystick button 0"))
         {
-            m_ChargeingObject = Instantiate(m_ChargeObject);
-            m_ChargeingObject.transform.position = transform.position + new Vector3(0,-0.5f);
+           
         }
 
         //1ボタンが押されていたら
         if (Input.GetKey("joystick button 0"))
         {
             //チャージ時間を加算する
-            if((m_ChargeCurrentTime += Time.deltaTime) >= m_ChargeTime)
-            {
-                m_ChargeingObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0);
-            }
+            m_ChargeCurrentTime += Time.deltaTime;
 
-            m_ChargeingObject.transform.position = transform.position + new Vector3(0, -0.5f);
+            if(m_ChargeingObject)
+            {
+                m_ChargeingObject.transform.position = transform.position + new Vector3(0, -0.5f);
+
+                if (m_ChargeCurrentTime >= m_ChargeTime)
+                {
+                    m_ChargeingObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0);
+                }
+            }
+            else if(m_ChargeCurrentTime >= 0.5)
+            {
+                m_ChargeingObject = Instantiate(m_ChargeObject);
+                m_ChargeingObject.transform.position = transform.position + new Vector3(0, -0.5f);
+            }
+            
         }
 
         //1ボタンが離されたら
@@ -215,30 +222,27 @@ public class Player : MonoBehaviour
             if (m_ChargeCurrentTime >= m_ChargeTime)
             {
                 //選択されている弾を生成
-                BulletObj = Instantiate(m_BulletList[(int)m_BulletType]);
+                BulletObj = m_BulletList[(int)m_BulletType];
             }
             else
             {
                 //通常弾を生成
-                BulletObj = Instantiate(m_BulletList[0]);
+                BulletObj = m_BulletList[0];
             }
-
-            //プレイヤーの位置にする
-            BulletObj.transform.position = transform.position;
 
             if(m_AxisY > 0.5)
             {
-                BulletObj.GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0, 0, m_FireMaxAngle / 2 * Mathf.Sign(m_FireDir.x)) * new Vector2(Mathf.Sign(m_FireDir.x), 0);
+                BulletObj.GetComponent<Bullet>().SpawnBullet(transform.position, Quaternion.Euler(0, 0, m_FireMaxAngle / 2 * Mathf.Sign(m_FireDir.x)) * new Vector2(Mathf.Sign(m_FireDir.x), 0));
                 m_Animator.SetInteger("FireDir", 1);
             }
             else if(m_AxisY < -0.5)
             {
-                BulletObj.GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0, 0, -m_FireMaxAngle / 2 * Mathf.Sign(m_FireDir.x)) * new Vector2(Mathf.Sign(m_FireDir.x), 0);
+                BulletObj.GetComponent<Bullet>().SpawnBullet(transform.position, Quaternion.Euler(0, 0, -m_FireMaxAngle / 2 * Mathf.Sign(m_FireDir.x)) * new Vector2(Mathf.Sign(m_FireDir.x), 0));
                 m_Animator.SetInteger("FireDir", -1);
             }
             else
             {
-                BulletObj.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(m_FireDir.x), 0);
+                BulletObj.GetComponent<Bullet>().SpawnBullet(transform.position, new Vector2(Mathf.Sign(m_FireDir.x), 0));
                 m_Animator.SetInteger("FireDir", 0);
             }
 
@@ -250,6 +254,7 @@ public class Player : MonoBehaviour
 
             Destroy(m_ChargeingObject);
 
+            m_ChargeingObject = null;
         }
     }
 

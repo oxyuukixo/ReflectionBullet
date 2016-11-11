@@ -105,6 +105,8 @@ public class Bullet : MonoBehaviour {
                 BulletObj.GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0, 0, 30 * Mathf.Pow(-1,i)) * GetComponent<Rigidbody2D>().velocity;
 
                 BulletObj.GetComponent<Bullet>().m_HitHP = m_HitHP;
+
+                BulletObj.GetComponent<Bullet>().m_Damage = m_Damage * 0.5f;
             }
 
             //元のオブジェクトは削除
@@ -168,5 +170,21 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);
         }
 
+    }
+
+    //=============================================================================
+    //
+    // Purpose 弾のスポーン関数
+    //
+    //=============================================================================
+    public GameObject SpawnBullet(Vector2 Position, Vector2 Velocity)
+    {
+        GameObject SpawnObj = Instantiate(gameObject);
+
+        SpawnObj.transform.position = Position;
+
+        SpawnObj.GetComponent<Rigidbody2D>().velocity = Velocity;
+
+        return SpawnObj;
     }
 }
