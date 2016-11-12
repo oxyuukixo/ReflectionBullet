@@ -49126,6 +49126,16 @@ Prefab:
       propertyPath: m_Speed
       value: 7.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011767132192, guid: 2679addab4811474aa0ebae7002a6226,
+        type: 2}
+      propertyPath: m_DashTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011767132192, guid: 2679addab4811474aa0ebae7002a6226,
+        type: 2}
+      propertyPath: m_DashSpeed
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2679addab4811474aa0ebae7002a6226, type: 2}
   m_IsPrefabParent: 0
