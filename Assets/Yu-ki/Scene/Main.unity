@@ -736,6 +736,12 @@ Prefab:
       propertyPath: m_DashTime
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011767132192, guid: 2679addab4811474aa0ebae7002a6226,
+        type: 2}
+      propertyPath: m_AfterimageObject
+      value: 
+      objectReference: {fileID: 1000013431995378, guid: 4523e3d920e54a44091323f1440816fd,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2679addab4811474aa0ebae7002a6226, type: 2}
   m_IsPrefabParent: 0

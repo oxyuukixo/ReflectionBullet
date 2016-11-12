@@ -102,6 +102,8 @@ public class Bullet : MonoBehaviour {
 
                 BulletObj.transform.position = transform.position;
 
+                BulletObj.transform.localScale *= 0.9f;
+
                 BulletObj.GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0, 0, 30 * Mathf.Pow(-1,i)) * GetComponent<Rigidbody2D>().velocity;
 
                 BulletObj.GetComponent<Bullet>().m_HitHP = m_HitHP;

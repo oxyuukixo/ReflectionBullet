@@ -78,6 +78,7 @@
     <Compile Include="Assets\Hayato\Script\EnemyController.cs" />
     <Compile Include="Assets\Hayato\Script\EnemySheld.cs" />
     <Compile Include="Assets\Hayato\Script\S_EnemyController.cs" />
+    <Compile Include="Assets\Yu-ki\Scripts\Afterimage.cs" />
     <Compile Include="Assets\Yu-ki\Scripts\Bullet.cs" />
     <Compile Include="Assets\Yu-ki\Scripts\BulletExtensionEditor.cs" />
     <Compile Include="Assets\Yu-ki\Scripts\OneAnimationDestroy.cs" />

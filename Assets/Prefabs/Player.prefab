@@ -119,6 +119,7 @@ MonoBehaviour:
   m_ChargeObject: {fileID: 0}
   m_ChargeTime: 1
   m_RightStart: 0
+  m_AfterimageObject: {fileID: 0}
   m_NormalBullet: {fileID: 1000011002142994, guid: 6b14a36cfb60c804e8745d34ed218b37,
     type: 2}
   m_SpeedBullet: {fileID: 1000014255222994, guid: f99029206f5c98140abfc5637d3001dc,

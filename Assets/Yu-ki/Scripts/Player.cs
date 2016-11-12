@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     //右を向いてスタートするかのフラグ
     public bool m_RightStart;
 
+    public GameObject m_AfterimageObject;
+
     //使用する弾
     public GameObject m_NormalBullet;       //通常弾
     public GameObject m_SpeedBullet;          //スピード弾
@@ -350,18 +352,26 @@ public class Player : MonoBehaviour
     //=============================================================================
     void Dash()
     {
-        if (Input.GetKeyDown("joystick button 5") && !m_IsJump && !m_IsSecondJump)
+        if (Input.GetKeyDown("joystick button 5") && !m_IsJump && !m_IsSecondJump && m_Rigidbody.velocity.x != 0)
         {
             m_IsDash = true;
             m_Animator.SetBool("IsDash", true);
             m_DashCurrentTime = 0;
         }
 
-        if(m_IsDash)
+        if(Input.GetKeyUp("joystick button 5"))
+        {
+            m_IsDash = false;
+            m_Animator.SetBool("IsDash", false);
+        }
+
+        if (m_IsDash)
         {
             if((m_DashCurrentTime += Time.deltaTime) < m_DashTime)
             {
                 m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.normalized.x * m_DashSpeed, m_Rigidbody.velocity.y);
+
+                m_AfterimageObject.GetComponent<Afterimage>().SpawnAfterimage(m_SpriteRenderer.sprite, transform.position,m_SpriteRenderer.flipX);
             }
             else
             {
