@@ -36,24 +36,36 @@ public class B_EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Vector3 scale = transform.localScale;
-        float dx = (target.transform.position.x - transform.position.x);
-
-        if(dx > 0.1f)
-        {
-            scale.x = -0.3f;
-            direction = 1;
-        }
-        else
-        {
-            scale.x = 0.3f;
-            direction = -1;
-        }
-
-        transform.localScale = scale;
 	}
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnWillRenderObject()
+    {
+#if UNITY_EDITOR
+
+        if (Camera.current.name != "SceneCamera" && Camera.current.name != "PreviewCamera")
+
+#endif
+        {
+            Vector3 scale = transform.localScale;
+            float dx = (target.transform.position.x - transform.position.x);
+
+            if (dx > 0.1f)
+            {
+                scale.x = -0.3f;
+                direction = 1;
+            }
+            else
+            {
+                scale.x = 0.3f;
+                direction = -1;
+            }
+
+            transform.localScale = scale;
+        }
+    }
+
+
+            void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Bullet")
         {

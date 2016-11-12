@@ -8,6 +8,7 @@ TagManager:
   - Stage
   - Bullet
   - EnemyBullet
+  - EnemyZone
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - PenetrationBullet
   - EnemyBullet
   - Stage
-  - 
+  - CameraCollision
   - 
   - 
   - 
