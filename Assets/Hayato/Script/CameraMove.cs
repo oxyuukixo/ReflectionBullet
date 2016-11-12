@@ -12,6 +12,8 @@ public class CameraMove : MonoBehaviour {
     public float end_x;
     public float end_y;
 
+    bool Lock_Camera = false;
+
     // Use this for initialization
     void Start () {
 	
@@ -20,7 +22,11 @@ public class CameraMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
+        if(Lock_Camera == false)
+        {
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
+
+        }
 
         if (transform.position.x < start_x)
         {
@@ -30,6 +36,8 @@ public class CameraMove : MonoBehaviour {
         if (transform.position.x >= end_x)
         {
             transform.position = new Vector3(end_x, player.transform.position.y, -1);
+
+            Lock_Camera = true;
         }
 
         if (transform.position.y < start_y)
