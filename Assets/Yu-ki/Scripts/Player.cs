@@ -386,11 +386,13 @@ public class Player : MonoBehaviour
     // Purpose オブジェクトとヒットした瞬間
     //
     //=============================================================================
-    void OnCollisionEnter2D(Collision2D hit)
+    void OnTriggerEnter2D(Collider2D hit)
     {
         if(hit.gameObject.tag == "Enemy")
         {
+            m_HP -= hit.gameObject.GetComponent<Enemy>().m_Damage;
 
+            m_Animator.SetTrigger("DamageTrigger");
         }
 
         if (hit.gameObject.tag == "EnemyBullet")
