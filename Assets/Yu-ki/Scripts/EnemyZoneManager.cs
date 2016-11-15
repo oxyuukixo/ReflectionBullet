@@ -22,9 +22,10 @@ public class EnemyZoneManager : MonoBehaviour {
     //リスポーンする間隔
     public float m_SpawnTime;
 
-
     //エネミーゾーンに入ったかどうか
-    private bool m_IsEnter = false;
+    public bool m_IsEnter = false;
+
+
 
     //リスポーンがすべて完了したかどうか
     private bool m_IsSpawnFinish;
