@@ -120,18 +120,13 @@ MonoBehaviour:
   m_ChargeTime: 1
   m_RightStart: 0
   m_AfterimageObject: {fileID: 0}
-  m_NormalBullet: {fileID: 1000011002142994, guid: 6b14a36cfb60c804e8745d34ed218b37,
+  m_NormalBullet: {fileID: 56379936, guid: 6b14a36cfb60c804e8745d34ed218b37, type: 2}
+  m_SpeedBullet: {fileID: 56382368, guid: f99029206f5c98140abfc5637d3001dc, type: 2}
+  m_PenetrationBullet: {fileID: 56384160, guid: 7b62a0d3f5ce4ae4ca1dce8d0cb4ae45,
     type: 2}
-  m_SpeedBullet: {fileID: 1000014255222994, guid: f99029206f5c98140abfc5637d3001dc,
-    type: 2}
-  m_PenetrationBullet: {fileID: 1000011288529128, guid: 7b62a0d3f5ce4ae4ca1dce8d0cb4ae45,
-    type: 2}
-  m_DiffusionBullet: {fileID: 1000013220261530, guid: f23d5d719bd40304f9047ddcd13a7eef,
-    type: 2}
-  m_ExplosionBullet: {fileID: 1000014084685210, guid: 3c62dedb8195b5741aec4c6a559a336c,
-    type: 2}
-  m_DivisionBullet: {fileID: 1000010574313566, guid: be49c8fe2ee391340aadb1e26898899f,
-    type: 2}
+  m_DiffusionBullet: {fileID: 56385952, guid: f23d5d719bd40304f9047ddcd13a7eef, type: 2}
+  m_ExplosionBullet: {fileID: 56386848, guid: 3c62dedb8195b5741aec4c6a559a336c, type: 2}
+  m_DivisionBullet: {fileID: 56389024, guid: be49c8fe2ee391340aadb1e26898899f, type: 2}
   m_BulletType: 1
 --- !u!212 &212000012285779694
 SpriteRenderer:
