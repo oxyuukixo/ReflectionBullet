@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : Enemy {
 
     public GameObject target;
     public float speed = 0.1f; // 移動量

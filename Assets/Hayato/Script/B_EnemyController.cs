@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class B_EnemyController : MonoBehaviour {
+public class B_EnemyController : Enemy{
 
     public int speed;
 
@@ -13,6 +13,8 @@ public class B_EnemyController : MonoBehaviour {
     public GameObject shootposition;
 
     public float HP;
+
+    public float m_Damege;
 
     bool damage_flag;
 
