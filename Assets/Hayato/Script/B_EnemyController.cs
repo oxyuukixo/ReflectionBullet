@@ -22,7 +22,7 @@ public class B_EnemyController : Enemy{
 
         damage_flag = true;
 
-        shot_time = 1.0f;
+        shot_time = 2.0f;
 
         shootposition = gameObject.transform.FindChild("BulletPosition").gameObject;   
     }

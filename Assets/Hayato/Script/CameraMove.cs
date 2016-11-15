@@ -12,6 +12,8 @@ public class CameraMove : MonoBehaviour {
     public float end_x;
     public float end_y;
 
+    public bool slide_x = true;
+
     bool Lock_Camera = false;
 
     // Use this for initialization
@@ -24,8 +26,12 @@ public class CameraMove : MonoBehaviour {
 
         if(Lock_Camera == false)
         {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
+            if(slide_x == true)
+            {
+                transform.position = new Vector3(player.transform.position.x,transform.position.y, -1);
+            }
 
+            transform.position = new Vector3(transform.position.x, player.transform.position.y, -1);
         }
 
         if (transform.position.x < start_x)

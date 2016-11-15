@@ -28,7 +28,7 @@ public class EnemyZoneManager : MonoBehaviour {
 
 
     //リスポーンがすべて完了したかどうか
-    private bool m_IsSpawnFinish;
+    public bool m_IsSpawnFinish;
 
     //前回出現してからの時間
     private float m_SpawnCurrentTime = 0;
@@ -68,6 +68,8 @@ public class EnemyZoneManager : MonoBehaviour {
 
         if(m_IsSpawnFinish && m_EnemyPar.transform.childCount <= 0)
         {
+            GameObject.Find("Main Camera").GetComponent<CameraMove>().slide_x = true;
+
             Destroy(gameObject);
         }
     }
@@ -76,6 +78,8 @@ public class EnemyZoneManager : MonoBehaviour {
     {
         if(hit.tag == "Player" && !m_IsEnter)
         {
+            GameObject.Find("Main Camera").GetComponent<CameraMove>().slide_x = false;
+
             m_IsEnter = true;
 
             for(int i = 0;i < m_SpawnPoint.Length;i++)
