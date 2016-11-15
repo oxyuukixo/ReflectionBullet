@@ -123,8 +123,13 @@ public class Player : MonoBehaviour
             //攻撃しているかのチェック
             FireCheck();
 
-            //移動
-            Move();
+            AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
+
+            if (!stateInfo.IsName("PlayerDamage") && !stateInfo.IsName("PlayerBackDown") && !stateInfo.IsName("PlayerDie"))        
+            {
+                //移動
+                Move();
+            }
 
             //攻撃
             Fire();
@@ -388,12 +393,12 @@ public class Player : MonoBehaviour
     //=============================================================================
     void OnTriggerEnter2D(Collider2D hit)
     {
-        //if(hit.gameObject.tag == "Enemy")
-        //{
-        //    m_HP -= hit.gameObject.GetComponent<Enemy>().m_Damage;
+        if (hit.gameObject.tag == "Enemy")
+        {
+            m_HP -= hit.gameObject.GetComponent<Enemy>().m_Damage;
 
-        //    m_Animator.SetTrigger("DamageTrigger");
-        //}
+            m_Animator.SetTrigger("DamageTrigger");
+        }
 
         if (hit.gameObject.tag == "EnemyBullet")
         {

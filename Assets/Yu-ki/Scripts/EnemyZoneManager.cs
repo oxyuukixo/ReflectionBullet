@@ -5,13 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class EnemyZoneManager : MonoBehaviour {
 
-    //エネミーゾーンに入ったかどうか
-    bool m_IsEnter = false;
-
     //リスポーンする敵
     public GameObject[] m_SpawnEnemy;
 
     public GameObject[] m_SpawnPoint;
+
+    //エネミーゾーンのコリジョン
+    public GameObject[] m_CollisionObject;
 
     //リスポーンする数
     public int m_SpawnNum;
@@ -22,6 +22,9 @@ public class EnemyZoneManager : MonoBehaviour {
     //リスポーンする間隔
     public float m_SpawnTime;
 
+
+    //エネミーゾーンに入ったかどうか
+    private bool m_IsEnter = false;
 
     //リスポーンがすべて完了したかどうか
     private bool m_IsSpawnFinish;
@@ -38,6 +41,13 @@ public class EnemyZoneManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         m_EnemyPar = new GameObject();
+
+        m_EnemyPar.transform.parent = transform;
+
+        for(int i = 0;i < m_CollisionObject.Length;i++)
+        {
+            m_CollisionObject[i].SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -57,7 +67,7 @@ public class EnemyZoneManager : MonoBehaviour {
 
         if(m_IsSpawnFinish && m_EnemyPar.transform.childCount <= 0)
         {
-
+            Destroy(gameObject);
         }
     }
 
@@ -70,6 +80,11 @@ public class EnemyZoneManager : MonoBehaviour {
             for(int i = 0;i < m_SpawnPoint.Length;i++)
             {
                 Spawn(m_SpawnPoint[i].transform);
+            }
+
+            for (int i = 0; i < m_CollisionObject.Length; i++)
+            {
+                m_CollisionObject[i].SetActive(true);
             }
         }
     }
@@ -86,6 +101,7 @@ public class EnemyZoneManager : MonoBehaviour {
         m_SpawnCurrentNum++;
     }
 
+    //敵のスポーン関数(座標指定)
     void Spawn(Transform pos)
     {
         GameObject SpawnEnemy = Instantiate(m_SpawnEnemy[Random.Range(0, m_SpawnEnemy.Length)]);
