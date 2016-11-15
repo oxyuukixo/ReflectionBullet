@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyExtensionEditor : MonoBehaviour {
+public class EnemyZoneManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
