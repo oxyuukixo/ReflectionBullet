@@ -7,7 +7,7 @@ public class EnemySheld : Enemy {
     public static bool sheld_flag;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
         sheld_flag = true;
         damage_flag = true;
 	}

@@ -15,8 +15,8 @@ public class Enemy : MonoBehaviour {
     public float m_Damage;
 
     // Use this for initialization
-    void Start () {
-	
+    protected virtual void Start () {
+        target = GameObject.Find("Player");
 	}
 	
 	// Update is called once per frame

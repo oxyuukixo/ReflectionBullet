@@ -6,8 +6,10 @@ public class EnemyController : Enemy {
 
     bool moveflag;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         moveflag = true;
         damage_flag = true;
     }
@@ -21,11 +23,8 @@ public class EnemyController : Enemy {
 
     void OnWillRenderObject()
     {
-#if UNITY_EDITOR
 
         if (Camera.current.name != "SceneCamera" && Camera.current.name != "PreviewCamera")
-
-#endif
         {
             Vector2 enemyPos = this.gameObject.transform.localPosition;
             Vector3 scale = transform.localScale;

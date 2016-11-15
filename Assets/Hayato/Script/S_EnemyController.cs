@@ -7,9 +7,14 @@ public class S_EnemyController : Enemy {
     bool moveflag;
 
     // Use this for initialization
-    void Start () {
+    protected override void Start () {
+
+        base.Start();
+
         moveflag = true;
         damage_flag = true;
+
+        
     }
 	
 	// Update is called once per frame
@@ -20,11 +25,7 @@ public class S_EnemyController : Enemy {
 
     void OnWillRenderObject()
     {
-        #if UNITY_EDITOR
-
-            if (Camera.current.name != "SceneCamera" && Camera.current.name != "PreviewCamera")
-
-        #endif
+        if (Camera.current.name != "SceneCamera" && Camera.current.name != "PreviewCamera")
         {
             Vector2 enemyPos = this.gameObject.transform.localPosition;
             Vector3 scale = transform.localScale;

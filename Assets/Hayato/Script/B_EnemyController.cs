@@ -10,36 +10,48 @@ public class B_EnemyController : Enemy{
 
     int direction = -1;
 
+    bool shot_flag = false;
+
+    float shot_time;
+    float time = 0.0f;
+
     // Use this for initialization
-    IEnumerator Start () {
+    protected override void Start() {
+
+        base.Start();
 
         damage_flag = true;
 
-        shootposition = gameObject.transform.FindChild("BulletPosition").gameObject;
+        shot_time = 1.0f;
 
-        while (true)
-        {
-            bullet.GetComponent<Bullet>().SpawnBullet(transform.position,new Vector2(direction,0));
-            // 1秒待つ
-            yield return new WaitForSeconds(1.0f);
-        }
+        shootposition = gameObject.transform.FindChild("BulletPosition").gameObject;   
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        time = time + Time.deltaTime;
+
+        if(time >= shot_time)
+        {
+            if (shot_flag == true)
+            {
+                bullet.GetComponent<Bullet>().SpawnBullet(transform.position, new Vector2(direction, 0));
+
+                time = 0;
+            }
+        }
+
 	}
 
     void OnWillRenderObject()
     {
-#if UNITY_EDITOR
-
         if (Camera.current.name != "SceneCamera" && Camera.current.name != "PreviewCamera")
-
-#endif
         {
             Vector3 scale = transform.localScale;
             float dx = (target.transform.position.x - transform.position.x);
+
+            shot_flag = true;
 
             if (dx > 0.1f)
             {
@@ -54,6 +66,10 @@ public class B_EnemyController : Enemy{
 
             transform.localScale = scale;
         }
+        //else
+        //{
+        //    shot_flag = false;
+        //}
     }
 
 
