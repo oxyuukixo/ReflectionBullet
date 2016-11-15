@@ -64214,10 +64214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5923610e586c49c4bb844c7939b4a45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 419346702}
   speed: 0.01
+  target: {fileID: 419346702}
   HP: 20
-  m_Damege: 0
+  damage_flag: 0
+  m_Damage: 0
 --- !u!1 &670546665
 GameObject:
   m_ObjectHideFlags: 0
@@ -64597,7 +64598,7 @@ Prefab:
     - target: {fileID: 114000011767132192, guid: 2679addab4811474aa0ebae7002a6226,
         type: 2}
       propertyPath: m_HP
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 114000011767132192, guid: 2679addab4811474aa0ebae7002a6226,
         type: 2}
@@ -65295,9 +65296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e1aae5e960b54499dd720640c4f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 419346702}
   speed: 0.05
+  target: {fileID: 419346702}
   HP: 10
+  damage_flag: 0
+  m_Damage: 0
 --- !u!1 &1117290567
 GameObject:
   m_ObjectHideFlags: 0
@@ -65564,7 +65567,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80acafb7fc5c00e4e9431c15edd083b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  target: {fileID: 0}
   HP: 15
+  damage_flag: 0
+  m_Damage: 0
 --- !u!210 &1128608307
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -67086,11 +67093,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  bullet: {fileID: 1000011175512036, guid: 1c1cace38347afd498af4b4a7b4ac319, type: 2}
   target: {fileID: 419346702}
-  shootposition: {fileID: 933475172}
   HP: 8
-  m_Damege: 0
+  damage_flag: 0
+  m_Damage: 0
+  bullet: {fileID: 1000011175512036, guid: 1c1cace38347afd498af4b4a7b4ac319, type: 2}
+  shootposition: {fileID: 933475172}
 --- !u!1 &2130631429
 GameObject:
   m_ObjectHideFlags: 0

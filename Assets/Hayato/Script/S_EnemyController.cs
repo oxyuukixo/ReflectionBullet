@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class S_EnemyController : Enemy {
 
-    public GameObject target;
-    public float speed = 0.1f; // 移動量
-
-    public float HP;
-
     bool moveflag;
-
-    bool damage_flag;
-
-    public float m_Damege;
 
     // Use this for initialization
     void Start () {
@@ -90,35 +81,5 @@ public class S_EnemyController : Enemy {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Bullet")
-        {
-            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
-
-            if (HP <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Bullet" && damage_flag == true && other.gameObject.GetComponent<Bullet>().m_Type == Bullet.BulletType.Penetration) 
-        {
-            damage_flag = false;
-            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
-
-            if (HP <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        damage_flag = true;
-    }
+    
 }

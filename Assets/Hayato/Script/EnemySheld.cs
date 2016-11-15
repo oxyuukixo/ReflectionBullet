@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySheld : MonoBehaviour {
-
-    public float HP;
+public class EnemySheld : Enemy {
 
     public static bool sheld_flag;
-
-    bool damage_flag;
 
 	// Use this for initialization
 	void Start () {
@@ -21,29 +17,11 @@ public class EnemySheld : MonoBehaviour {
 	
 	}
 
-    //void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    if(other.gameObject.tag == "Bullet")
-    //    {
-    //        HP--;
-    //        Debug.Log("sheld:" + HP);
-
-    //        if (HP <= 0)
-    //        {
-    //            Destroy(this.gameObject);
-
-    //            sheld_flag = false;
-    //        }
-    //    }
-    //}
-
-    void OnTriggerEnter2D(Collider2D other)
+    public override void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Bullet" && damage_flag == true)
+        if (other.gameObject.tag == "Bullet")
         {
-            damage_flag = false;
             HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
-            Debug.Log("sheld:" + HP);
 
             if (HP <= 0)
             {
@@ -54,8 +32,20 @@ public class EnemySheld : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    public override void OnTriggerEnter2D(Collider2D other)
     {
-        damage_flag = true;
+        if (other.gameObject.tag == "Bullet" && damage_flag == true)
+        {
+            damage_flag = false;
+            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
+
+            if (HP <= 0)
+            {
+                Destroy(this.gameObject);
+
+                sheld_flag = false;
+            }
+        }
     }
+
 }
