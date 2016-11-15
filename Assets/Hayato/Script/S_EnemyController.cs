@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class S_EnemyController : MonoBehaviour {
+public class S_EnemyController : Enemy {
 
     public GameObject target;
     public float speed = 0.1f; // 移動量
@@ -12,6 +12,8 @@ public class S_EnemyController : MonoBehaviour {
     bool moveflag;
 
     bool damage_flag;
+
+    public float m_Damege;
 
     // Use this for initialization
     void Start () {
