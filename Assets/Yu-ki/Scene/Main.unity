@@ -192,6 +192,50 @@ Transform:
   m_Father: {fileID: 1653241759}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &396354642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 396354643}
+  - 61: {fileID: 396354644}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &396354643
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 396354642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.49, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 5.687501, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1653241759}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &396354644
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 396354642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &463229465
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,11 +952,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1653241758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.6, y: -1.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 478181978}
   - {fileID: 304158936}
+  - {fileID: 396354643}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -929,11 +974,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SpawnEnemy:
   - {fileID: 1000014084685210, guid: 3c62dedb8195b5741aec4c6a559a336c, type: 2}
-  - {fileID: 1000010539834284, guid: 2679addab4811474aa0ebae7002a6226, type: 2}
   m_SpawnPoint:
   - {fileID: 478181977}
   - {fileID: 304158935}
-  m_SpawnNum: 20
+  m_CollisionObject:
+  - {fileID: 396354642}
+  m_SpawnNum: 5
   m_EnemyNum: 3
   m_SpawnTime: 2
 --- !u!61 &1653241761
