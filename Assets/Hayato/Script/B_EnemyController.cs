@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class B_EnemyController : Enemy{
 
-    public int speed;
-
     public GameObject bullet;
 
-    public GameObject target;
-
     public GameObject shootposition;
-
-    public float HP;
-
-    public float m_Damege;
-
-    bool damage_flag;
 
     int direction = -1;
 
@@ -67,36 +57,36 @@ public class B_EnemyController : Enemy{
     }
 
 
-            void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Bullet")
-        {
-            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
+    //        void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    if (other.gameObject.tag == "Bullet")
+    //    {
+    //        HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
 
-            if (HP <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
+    //        if (HP <= 0)
+    //        {
+    //            Destroy(this.gameObject);
+    //        }
+    //    }
+    //}
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Bullet" && damage_flag == true && other.gameObject.GetComponent<Bullet>().m_Type == Bullet.BulletType.Penetration)
-        {
-            damage_flag = false;
-            HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Bullet" && damage_flag == true && other.gameObject.GetComponent<Bullet>().m_Type == Bullet.BulletType.Penetration)
+    //    {
+    //        damage_flag = false;
+    //        HP -= other.gameObject.GetComponent<Bullet>().m_Damage;
             
 
-            if (HP <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
+    //        if (HP <= 0)
+    //        {
+    //            Destroy(this.gameObject);
+    //        }
+    //    }
+    //}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        damage_flag = true;
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    damage_flag = true;
+    //}
 }
