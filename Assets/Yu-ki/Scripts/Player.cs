@@ -393,24 +393,27 @@ public class Player : MonoBehaviour
     //=============================================================================
     void OnTriggerEnter2D(Collider2D hit)
     {
-        if (hit.gameObject.tag == "Enemy")
+        if (m_IsSurvival)
         {
-            m_HP -= hit.gameObject.GetComponent<Enemy>().m_Damage;
+            if (hit.gameObject.tag == "Enemy")
+            {
+                m_HP -= hit.gameObject.GetComponent<Enemy>().m_Damage;
 
-            m_Animator.SetTrigger("DamageTrigger");
-        }
+                m_Animator.SetTrigger("DamageTrigger");
+            }
 
-        if (hit.gameObject.tag == "EnemyBullet")
-        {
-            m_HP -= hit.gameObject.GetComponent<Bullet>().m_Damage;
+            if (hit.gameObject.tag == "EnemyBullet")
+            {
+                m_HP -= hit.gameObject.GetComponent<Bullet>().m_Damage;
 
-            m_Animator.SetTrigger("DamageTrigger");
-        }
+                m_Animator.SetTrigger("DamageTrigger");
+            }
 
-        if(m_HP <= 0)
-        {
-            m_IsSurvival = false;
-            m_Animator.SetTrigger("DieTrigger");
+            if (m_HP <= 0)
+            {
+                m_IsSurvival = false;
+                m_Animator.SetTrigger("DieTrigger");
+            }
         }
     }
 }
