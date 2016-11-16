@@ -146,7 +146,7 @@ GameObject:
   - 61: {fileID: 60781770}
   m_Layer: 13
   m_Name: MapHitArea_8
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,7 +229,7 @@ GameObject:
   - 61: {fileID: 83362603}
   m_Layer: 13
   m_Name: MapHitArea_14
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   - 60: {fileID: 151817974}
   m_Layer: 13
   m_Name: MapHitArea_16
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -427,7 +427,7 @@ GameObject:
   - 61: {fileID: 206973276}
   m_Layer: 13
   m_Name: MapHitArea_29
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,6 +587,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1000010539834284, guid: 2679addab4811474aa0ebae7002a6226,
         type: 2}
+    - target: {fileID: 50000011395890322, guid: cae97b44b8eef3d4096d53c580940ce4,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cae97b44b8eef3d4096d53c580940ce4, type: 2}
   m_IsPrefabParent: 0
@@ -602,7 +607,7 @@ GameObject:
   - 61: {fileID: 257454906}
   m_Layer: 13
   m_Name: MapHitArea_7 (3)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -685,7 +690,7 @@ GameObject:
   - 60: {fileID: 369632889}
   m_Layer: 13
   m_Name: MapHitArea_26 (1)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -777,7 +782,7 @@ GameObject:
   - 60: {fileID: 439798450}
   m_Layer: 13
   m_Name: MapHitArea_17
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -864,7 +869,7 @@ GameObject:
   - 61: {fileID: 472983664}
   m_Layer: 13
   m_Name: MapHitArea_4
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64256,7 +64261,7 @@ GameObject:
   - 61: {fileID: 619402372}
   m_Layer: 13
   m_Name: MapHitArea_7
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64339,7 +64344,7 @@ GameObject:
   - 60: {fileID: 625671688}
   m_Layer: 13
   m_Name: MapHitArea_26
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64426,7 +64431,7 @@ GameObject:
   - 60: {fileID: 635289668}
   m_Layer: 13
   m_Name: MapHitArea_19
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64580,7 +64585,7 @@ GameObject:
   - 61: {fileID: 670546667}
   m_Layer: 13
   m_Name: MapHitArea_7 (2)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64663,7 +64668,7 @@ GameObject:
   - 61: {fileID: 708578765}
   m_Layer: 13
   m_Name: MapHitArea_7 (5)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64746,7 +64751,7 @@ GameObject:
   - 61: {fileID: 759017804}
   m_Layer: 13
   m_Name: MapHitArea_3
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64829,7 +64834,7 @@ GameObject:
   - 61: {fileID: 787223651}
   m_Layer: 13
   m_Name: MapHitArea_10
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64909,7 +64914,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012181620290, guid: 2679addab4811474aa0ebae7002a6226, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 190.4
+      value: 198.1
       objectReference: {fileID: 0}
     - target: {fileID: 4000012181620290, guid: 2679addab4811474aa0ebae7002a6226, type: 2}
       propertyPath: m_LocalPosition.y
@@ -65042,7 +65047,7 @@ GameObject:
   - 61: {fileID: 804729932}
   m_Layer: 13
   m_Name: MapHitArea_21
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65125,7 +65130,7 @@ GameObject:
   - 61: {fileID: 811272781}
   m_Layer: 13
   m_Name: MapHitArea_23 (2)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65208,7 +65213,7 @@ GameObject:
   - 60: {fileID: 849527761}
   m_Layer: 13
   m_Name: MapHitArea_26 (2)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65399,7 +65404,7 @@ GameObject:
   - 61: {fileID: 984945399}
   m_Layer: 13
   m_Name: MapHitArea_23 (1)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65482,7 +65487,7 @@ GameObject:
   - 61: {fileID: 1023784234}
   m_Layer: 13
   m_Name: MapHitArea_1
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65565,7 +65570,7 @@ GameObject:
   - 61: {fileID: 1029683616}
   m_Layer: 13
   m_Name: MapHitArea_28
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65695,7 +65700,7 @@ GameObject:
   - 60: {fileID: 1037629430}
   m_Layer: 13
   m_Name: MapHitArea_24
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65932,7 +65937,7 @@ GameObject:
   - 60: {fileID: 1117290569}
   m_Layer: 13
   m_Name: MapHitArea_15
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66019,7 +66024,7 @@ GameObject:
   - 61: {fileID: 1121822120}
   m_Layer: 13
   m_Name: MapHitArea_23
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66103,9 +66108,9 @@ GameObject:
   - 50: {fileID: 1184960448}
   - 70: {fileID: 1184960447}
   - 114: {fileID: 1184960452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66135,7 +66140,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -66206,7 +66211,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184960446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 211.46, y: 4.5, z: 37.109375}
+  m_LocalPosition: {x: 211.46, y: -5.2, z: 37.109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -66223,12 +66228,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a49cfe60e41a844aa14d6feb6df9a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal_bullet: {fileID: 0}
-  diffusion_bullet: {fileID: 0}
-  target: {fileID: 0}
-  HP: 0
-  ChargeTime: 0
-  JumpPower: 0
+  speed: 0
+  target: {fileID: 419346702}
+  HP: 50
+  damage_flag: 0
+  m_Damage: 0
+  normal_bullet: {fileID: 1000011002142994, guid: 3dc2b75486867a541bac53055efcff70,
+    type: 2}
+  diffusion_bullet: {fileID: 1000013220261530, guid: 8cb70a0e7e75fd542bd39c3f7242184e,
+    type: 2}
+  ChargeTime: 3
+  JumpPower: 6
+  Angle_max: 60
+  m_GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &1256918117
 GameObject:
   m_ObjectHideFlags: 0
@@ -66345,7 +66359,7 @@ GameObject:
   - 61: {fileID: 1258013586}
   m_Layer: 13
   m_Name: MapHitArea_22
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66428,7 +66442,7 @@ GameObject:
   - 61: {fileID: 1295355309}
   m_Layer: 13
   m_Name: MapHitArea_7 (4)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66511,7 +66525,7 @@ GameObject:
   - 60: {fileID: 1315535223}
   m_Layer: 13
   m_Name: MapHitArea_5
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66698,7 +66712,7 @@ GameObject:
   - 61: {fileID: 1416902124}
   m_Layer: 13
   m_Name: MapHitArea_12
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66833,7 +66847,7 @@ GameObject:
   - 60: {fileID: 1667112702}
   m_Layer: 13
   m_Name: MapHitArea_20
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67076,7 +67090,7 @@ GameObject:
   - 60: {fileID: 1720436901}
   m_Layer: 13
   m_Name: MapHitArea_25
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67163,7 +67177,7 @@ GameObject:
   - 61: {fileID: 1727877008}
   m_Layer: 13
   m_Name: MapHitArea_27
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67246,7 +67260,7 @@ GameObject:
   - 61: {fileID: 1752337101}
   m_Layer: 13
   m_Name: MapHitArea_2
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67329,7 +67343,7 @@ GameObject:
   - 61: {fileID: 1766209647}
   m_Layer: 13
   m_Name: MapHitArea_13
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67412,7 +67426,7 @@ GameObject:
   - 61: {fileID: 1785336676}
   m_Layer: 13
   m_Name: MapHitArea_6
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67536,7 +67550,7 @@ GameObject:
   - 61: {fileID: 1791603548}
   m_Layer: 13
   m_Name: MapHitArea_11
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67619,7 +67633,7 @@ GameObject:
   - 61: {fileID: 1836038539}
   m_Layer: 13
   m_Name: MapHitArea_7 (1)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67702,7 +67716,7 @@ GameObject:
   - 61: {fileID: 1874393063}
   m_Layer: 13
   m_Name: MapHitArea_7 (6)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67785,7 +67799,7 @@ GameObject:
   - 61: {fileID: 1982977155}
   m_Layer: 13
   m_Name: MapHitArea_9
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67868,7 +67882,7 @@ GameObject:
   - 60: {fileID: 2130631431}
   m_Layer: 13
   m_Name: MapHitArea_18
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
