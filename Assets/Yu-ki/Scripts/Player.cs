@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
             {
                 if ((m_InvincibleCurrentTIme += Time.deltaTime) >= m_InvincibleTIme)
                 {
+                    gameObject.layer = LayerMask.NameToLayer("Player");
                     m_IsInvincible = false;
                     m_SpriteRenderer.color = new Color(1, 1, 1, 1);
                 }
@@ -346,8 +347,6 @@ public class Player : MonoBehaviour
         //3ボタンが押されたら
         if (Input.GetKeyDown("joystick button 2") && !m_IsFire)
         {
-            Damage(1);
-
             if (!m_IsJump)
             {
                 m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, m_JumpPower);
@@ -408,17 +407,19 @@ public class Player : MonoBehaviour
         if (m_IsSurvival && !m_IsInvincible)
         {
             m_HP -= Damage;
-
-            m_Animator.SetTrigger("DamageTrigger");
-
-            m_IsInvincible = true;
-            m_InvincibleCurrentTIme = 0;
-            m_SpriteRenderer.color = new Color(1, 1, 1, 0.5f);
+            gameObject.layer = LayerMask.NameToLayer("InvinciblePlayer");
 
             if (m_HP <= 0)
             {
                 m_IsSurvival = false;
                 m_Animator.SetTrigger("DieTrigger");
+            }
+            else
+            {
+                m_Animator.SetTrigger("DamageTrigger");
+                m_IsInvincible = true;
+                m_InvincibleCurrentTIme = 0;
+                m_SpriteRenderer.color = new Color(1, 1, 1, 0.5f);
             }
         }
     }
