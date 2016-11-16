@@ -437,7 +437,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnCollisonEnter2D(Collision2D hit)
+    void OnCollisionEnter2D(Collision2D hit)
     {
         if (hit.gameObject.tag == "Enemy")
         {
