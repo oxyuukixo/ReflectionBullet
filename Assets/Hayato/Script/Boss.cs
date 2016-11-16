@@ -18,8 +18,10 @@ public class Boss : Enemy {
     private Animator anim;
     private Rigidbody2D rigid2d;
 
+    int direction = -1;
+
     //弾の発射する方向
-    private Vector2 m_FireDir = new Vector2(-1, 0);
+    private Vector2 m_FireDir;
 
     int MoveType;
     float NextMoveTime = 0.0f;
@@ -82,6 +84,8 @@ public class Boss : Enemy {
                     break;
             }
         }
+
+        Direction();
 
         Ground();
 	}
@@ -158,6 +162,8 @@ public class Boss : Enemy {
 
             if(NextMoveTime > 2f)
             {
+                m_FireDir = new Vector2(direction, 0);
+
                 diffusion_bullet.GetComponent<Bullet>().SpawnBullet(transform.position, Quaternion.Euler(0, 0, -Angle_max / 2 * Mathf.Sign(m_FireDir.x)) * new Vector2(Mathf.Sign(m_FireDir.x), 0));
 
                 m_Magic = false;
@@ -171,6 +177,25 @@ public class Boss : Enemy {
 
             
         }
+    }
+
+    void Direction()
+    {
+        Vector3 scale = transform.localScale;
+        float dx = (target.transform.position.x - transform.position.x);
+
+        if (dx > 0.1f)
+        {
+            scale.x = -1f;
+            direction = 1;
+        }
+        else
+        {
+            scale.x = 1f;
+            direction = -1;
+        }
+
+        transform.localScale = scale;
     }
 
     void Ground()
@@ -205,10 +230,8 @@ public class Boss : Enemy {
 
                 rigid2d.gravityScale = 1;
 
-                if (m_Air == false)
-                {
-                    anim.SetTrigger("Die");
-                }
+                anim.SetTrigger("Die");
+                
             }
         }
     }
@@ -222,14 +245,11 @@ public class Boss : Enemy {
 
             if (HP <= 0)
             {
-                m_PlayerFlag = false;
-
                 rigid2d.gravityScale = 1;
 
-                if(m_Air == false)
-                {
-                    anim.SetTrigger("Die");
-                }
+                
+                anim.SetTrigger("Die");
+                
             }
         }
     }
