@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     //ダッシュする時間
     public float m_DashTime = 2f;
 
+    //ダメージ後の無敵時間
+    public float m_InvincibleTIme = 2;
+
     //ジャンプ力
     public float m_JumpPower = 5f;
     public float m_SecondJumpPower = 5f;
@@ -75,6 +78,12 @@ public class Player : MonoBehaviour
     //現在のダッシュ時間
     private float m_DashCurrentTime;
 
+    //現在の無敵時間
+    private float m_InvincibleCurrentTIme;
+
+    //無敵かどうかのフラグ
+    private bool m_IsInvincible = false;
+
     //生きているかどうかのフラグ
     private bool m_IsSurvival = true;
 
@@ -118,18 +127,22 @@ public class Player : MonoBehaviour
     void Update()
     {
         //プレイヤーが生きてたら
-        if(m_IsSurvival)
+        if (m_IsSurvival)
         {
+            if (m_IsInvincible)
+            {
+                if ((m_InvincibleCurrentTIme += Time.deltaTime) >= m_InvincibleTIme)
+                {
+                    m_IsInvincible = false;
+                    m_SpriteRenderer.color = new Color(1, 1, 1, 1);
+                }
+            }
+
             //攻撃しているかのチェック
             FireCheck();
 
-            AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
-
-            if (!stateInfo.IsName("PlayerDamage") && !stateInfo.IsName("PlayerBackDown") && !stateInfo.IsName("PlayerDie"))        
-            {
-                //移動
-                Move();
-            }
+            //移動
+            Move();
 
             //攻撃
             Fire();
@@ -179,8 +192,10 @@ public class Player : MonoBehaviour
         m_AxisX = Input.GetAxis("Horizontal");
         m_AxisY = Input.GetAxis("Vertical");
 
+        AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
+
         //X軸の入力があったら
-        if (m_AxisX != 0f && !m_IsFire)
+        if (m_AxisX != 0f && !m_IsFire && !stateInfo.IsName("PlayerDamage") && !stateInfo.IsName("PlayerBackDown") && !stateInfo.IsName("PlayerDie"))
         {
             m_Rigidbody.velocity = new Vector2(m_AxisX * m_Speed, m_Rigidbody.velocity.y);
 
@@ -209,7 +224,7 @@ public class Player : MonoBehaviour
             //チャージ時間を加算する
             m_ChargeCurrentTime += Time.deltaTime;
 
-            if(m_ChargeingObject)
+            if (m_ChargeingObject)
             {
                 m_ChargeingObject.transform.position = transform.position + new Vector3(0, -0.5f);
 
@@ -218,12 +233,12 @@ public class Player : MonoBehaviour
                     m_ChargeingObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0);
                 }
             }
-            else if(m_ChargeCurrentTime >= 0.5)
+            else if (m_ChargeCurrentTime >= 0.5)
             {
                 m_ChargeingObject = Instantiate(m_ChargeObject);
                 m_ChargeingObject.transform.position = transform.position + new Vector3(0, -0.5f);
             }
-            
+
         }
 
         //1ボタンが離されたら
@@ -244,12 +259,12 @@ public class Player : MonoBehaviour
                 BulletObj = m_BulletList[0];
             }
 
-            if(m_AxisY > 0.5)
+            if (m_AxisY > 0.5)
             {
                 BulletObj.GetComponent<Bullet>().SpawnBullet(transform.position, Quaternion.Euler(0, 0, m_FireMaxAngle / 2 * Mathf.Sign(m_FireDir.x)) * new Vector2(Mathf.Sign(m_FireDir.x), 0));
                 m_Animator.SetInteger("FireDir", 1);
             }
-            else if(m_AxisY < -0.5)
+            else if (m_AxisY < -0.5)
             {
                 BulletObj.GetComponent<Bullet>().SpawnBullet(transform.position, Quaternion.Euler(0, 0, -m_FireMaxAngle / 2 * Mathf.Sign(m_FireDir.x)) * new Vector2(Mathf.Sign(m_FireDir.x), 0));
                 m_Animator.SetInteger("FireDir", -1);
@@ -304,9 +319,35 @@ public class Player : MonoBehaviour
     //=============================================================================
     void ChangeBullet()
     {
+        if (Input.GetKeyDown("joystick button 6"))
+        {
+            if ((m_BulletType -= 1) < Bullet.BulletType.Speed)
+            {
+                m_BulletType = Bullet.BulletType.Division;
+            }
+        }
+
+        if (Input.GetKeyDown("joystick button 7"))
+        {
+            if ((m_BulletType += 1) > Bullet.BulletType.Division)
+            {
+                m_BulletType = Bullet.BulletType.Speed;
+            }
+        }
+    }
+
+    //=============================================================================
+    //
+    // Purpose ジャンプ関数
+    //
+    //=============================================================================
+    void Jump()
+    {
         //3ボタンが押されたら
         if (Input.GetKeyDown("joystick button 2") && !m_IsFire)
         {
+            Damage(1);
+
             if (!m_IsJump)
             {
                 m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, m_JumpPower);
@@ -328,30 +369,6 @@ public class Player : MonoBehaviour
 
     //=============================================================================
     //
-    // Purpose ジャンプ関数
-    //
-    //=============================================================================
-    void Jump()
-    {
-        if (Input.GetKeyDown("joystick button 6"))
-        {
-            if ((m_BulletType -= 1) < Bullet.BulletType.Speed)
-            {
-                m_BulletType = Bullet.BulletType.Division;
-            }
-        }
-
-        if (Input.GetKeyDown("joystick button 7"))
-        {
-            if ((m_BulletType += 1) > Bullet.BulletType.Division)
-            {
-                m_BulletType = Bullet.BulletType.Speed;
-            }
-        }
-    }
-
-    //=============================================================================
-    //
     // Purpose ダッシュ　関数
     //
     //=============================================================================
@@ -364,7 +381,7 @@ public class Player : MonoBehaviour
             m_DashCurrentTime = 0;
         }
 
-        if(Input.GetKeyUp("joystick button 5"))
+        if (Input.GetKeyUp("joystick button 5"))
         {
             m_IsDash = false;
             m_Animator.SetBool("IsDash", false);
@@ -372,16 +389,36 @@ public class Player : MonoBehaviour
 
         if (m_IsDash)
         {
-            if((m_DashCurrentTime += Time.deltaTime) < m_DashTime)
+            if ((m_DashCurrentTime += Time.deltaTime) < m_DashTime)
             {
                 m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.normalized.x * m_DashSpeed, m_Rigidbody.velocity.y);
 
-                m_AfterimageObject.GetComponent<Afterimage>().SpawnAfterimage(m_SpriteRenderer.sprite, transform.position,m_SpriteRenderer.flipX);
+                m_AfterimageObject.GetComponent<Afterimage>().SpawnAfterimage(m_SpriteRenderer.sprite, transform.position, m_SpriteRenderer.flipX);
             }
             else
             {
                 m_IsDash = false;
                 m_Animator.SetBool("IsDash", false);
+            }
+        }
+    }
+
+    void Damage(float Damage)
+    {
+        if (m_IsSurvival && !m_IsInvincible)
+        {
+            m_HP -= Damage;
+
+            m_Animator.SetTrigger("DamageTrigger");
+
+            m_IsInvincible = true;
+            m_InvincibleCurrentTIme = 0;
+            m_SpriteRenderer.color = new Color(1, 1, 1, 0.5f);
+
+            if (m_HP <= 0)
+            {
+                m_IsSurvival = false;
+                m_Animator.SetTrigger("DieTrigger");
             }
         }
     }
@@ -393,27 +430,17 @@ public class Player : MonoBehaviour
     //=============================================================================
     void OnTriggerEnter2D(Collider2D hit)
     {
-        if (m_IsSurvival)
+        if (hit.gameObject.tag == "EnemyBullet")
         {
-            if (hit.gameObject.tag == "Enemy")
-            {
-                m_HP -= hit.gameObject.GetComponent<Enemy>().m_Damage;
+            Damage(hit.gameObject.GetComponent<Bullet>().m_Damage);
+        }
+    }
 
-                m_Animator.SetTrigger("DamageTrigger");
-            }
-
-            if (hit.gameObject.tag == "EnemyBullet")
-            {
-                m_HP -= hit.gameObject.GetComponent<Bullet>().m_Damage;
-
-                m_Animator.SetTrigger("DamageTrigger");
-            }
-
-            if (m_HP <= 0)
-            {
-                m_IsSurvival = false;
-                m_Animator.SetTrigger("DieTrigger");
-            }
+    void OnCollisonEnter2D(Collision2D hit)
+    {
+        if (hit.gameObject.tag == "Enemy")
+        {
+            Damage(hit.gameObject.GetComponent<Enemy>().m_Damage);
         }
     }
 }
