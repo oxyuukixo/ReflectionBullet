@@ -31,17 +31,21 @@ public class PlayerUI : MonoBehaviour {
 
         m_BulletTypeText.text = m_PlayerComp.m_BulletType.ToString();
 
-        m_HPGreenBer.localScale = new Vector3(m_PlayerComp.m_HP / m_MaxHP, m_HPGreenBer.localScale.y, m_HPGreenBer.localScale.z);
+        BarUpdate();
+    }
 
-        if(m_HPRedBar.localScale.x > m_HPGreenBer.localScale.x)
+    void BarUpdate()
+    {
+        m_HPGreenBer.localScale = new Vector3(Mathf.Clamp01(m_PlayerComp.m_HP / m_MaxHP), m_HPGreenBer.localScale.y, m_HPGreenBer.localScale.z);
+
+        if (m_HPRedBar.localScale.x > m_HPGreenBer.localScale.x)
         {
-            m_HPRedBar.localScale -= new Vector3(m_RedBarSpeed * Time.deltaTime,0,0);
+            m_HPRedBar.localScale -= new Vector3(m_RedBarSpeed * Time.deltaTime, 0, 0);
         }
 
         if (m_HPRedBar.localScale.x < m_HPGreenBer.localScale.x)
         {
             m_HPRedBar.localScale = m_HPGreenBer.localScale;
         }
-
     }
 }
